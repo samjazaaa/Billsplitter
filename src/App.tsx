@@ -29,13 +29,19 @@ function App() {
 
   const calculatePart = () => {
 
+    console.log(`total: ${total}`)
+
     const payerPart = payer.reduce((prev, curr) => prev + curr, 0);
     const otherPart = other.reduce((prev, curr) => prev + curr, 0);
 
-    const shared = (total - payerPart - otherPart) / 2;
+    console.log(`sum payer ${payerPart}`)
+    console.log(`sum other ${otherPart}`)
 
-    const payerTotal = Math.round(shared + payerPart * 100) / 100;
-    const otherTotal = Math.round(shared + otherPart * 100) / 100;
+    const shared = (total - payerPart - otherPart) / 2;
+    console.log(`shared half ${shared}`);
+
+    const payerTotal = Math.round((shared + payerPart) * 100) / 100;
+    const otherTotal = Math.round((shared + otherPart) * 100) / 100;
     return [payerTotal, otherTotal];
   }
 
