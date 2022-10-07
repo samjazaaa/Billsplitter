@@ -4,10 +4,10 @@ import SplittingCard from './SplittingCard';
 
 function App() {
 
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState<number>(0);
 
-  const [payer, setPayer] = useState([0.34, 1.69, 2.42, 3.37, 4.00]);
-  const [other, setOther] = useState([0.34, 1.69, 2.42, 3.37, 4.00]);
+  const [payer, setPayer] = useState<number[]>([]);
+  const [other, setOther] = useState<number[]>([]);
 
   const handleChangeTotal = (event: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -27,6 +27,18 @@ function App() {
     }
   }
 
+  const calculatePart = () => {
+
+    const payerPart = payer.reduce((prev, curr) => prev + curr, 0);
+    const otherPart = other.reduce((prev, curr) => prev + curr, 0);
+
+    const shared = (total - payerPart - otherPart) / 2;
+
+    const payerTotal = Math.round(shared + payerPart * 100) / 100;
+    const otherTotal = Math.round(shared + otherPart * 100) / 100;
+    return [payerTotal, otherTotal];
+  }
+
   return (
     <Container maxWidth="sm">
       <Typography variant="h1" align='center' gutterBottom>Bill Splitter</Typography>
@@ -44,7 +56,8 @@ function App() {
             </Grid>
           </Grid>
           <Grid item>
-            Output
+            <Typography variant='body1'>Total payer: {calculatePart()[0]}€</Typography>
+            <Typography variant='body1'>Total other: {calculatePart()[1]}€</Typography>
           </Grid>
         </Grid>
       </form>
