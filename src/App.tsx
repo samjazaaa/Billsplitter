@@ -56,7 +56,8 @@ function App() {
             container
             direction="row"
             justifyContent="space-between"
-            spacing={8}
+            alignItems="flex-start"
+            spacing={4}
           >
             <Grid item>
               <SplittingCard name="Payer" values={payer} setValues={setPayer} />

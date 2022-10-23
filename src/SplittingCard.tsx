@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import {
-  Paper,
+  Card,
   Typography,
   List,
   ListItem,
@@ -8,6 +8,7 @@ import {
   ListItemText,
   TextField,
   TextFieldProps,
+  CardContent,
 } from "@mui/material";
 import { DeleteForeverOutlined } from "@material-ui/icons";
 
@@ -41,32 +42,29 @@ const SplittingCard = ({ name, values, setValues }: SplittingCardProps) => {
   };
 
   return (
-    <Paper
-      sx={{
-        height: 340,
-        width: 210,
-      }}
-    >
-      <Typography variant="h4" align="center" gutterBottom>
-        {name}
-      </Typography>
-      <List dense>
-        {values.map((price, index) => (
-          <ListItem key={index}>
-            <ListItemIcon onClick={() => handleRemoveValue(index)}>
-              <DeleteForeverOutlined />
-            </ListItemIcon>
-            <ListItemText>{price}€</ListItemText>
-          </ListItem>
-        ))}
-      </List>
-      <TextField
-        id={name.toLowerCase()}
-        label={"Add " + name + " expense"}
-        onKeyUp={handleAddValue}
-        inputRef={inputRef}
-      />
-    </Paper>
+    <Card>
+      <CardContent>
+        <Typography variant="h4" align="center" gutterBottom>
+          {name}
+        </Typography>
+        <List dense>
+          {values.map((price, index) => (
+            <ListItem key={index}>
+              <ListItemIcon onClick={() => handleRemoveValue(index)}>
+                <DeleteForeverOutlined />
+              </ListItemIcon>
+              <ListItemText>{price}€</ListItemText>
+            </ListItem>
+          ))}
+        </List>
+        <TextField
+          id={name.toLowerCase()}
+          label={"Add " + name + " expense"}
+          onKeyUp={handleAddValue}
+          inputRef={inputRef}
+        />
+      </CardContent>
+    </Card>
   );
 };
 
